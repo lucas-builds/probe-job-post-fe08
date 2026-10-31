@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- CLIENT-NOTES: 1) Real candidate quality / time-to-hire / screen-out numbers needed to replace placeholder-free copy currently used. 2) Hiring lead quote needs a real attributed source or should be removed. 3) Confirm final CTA destination (signup form, demo request, etc). 4) Add logo/wordmark treatment if brand has one beyond the text lockup. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Probe — Post the job once. Probe finds who can do the work.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1210;
+    --surface:#171B18;
+    --text:#ECEEE9;
+    --muted:#8C948C;
+    --accent:#D6FF3F;
+    --accent2:#4A6B52;
+    --space-1:0.5rem;
+    --space-2:1rem;
+    --space-3:1.5rem;
+    --space-4:2.5rem;
+    --space-5:4rem;
+    --space-6:6rem;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
+    margin:0;
+    overflow-wrap:anywhere;
+  }
+  p{margin:0;}
+  a{color:inherit;}
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 var(--space-3);
+  }
+  /* reveal on scroll */
+  .reveal{opacity:1;transform:none;}
+  .js .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .6s ease, transform .6s ease;
+    animation:revealFallback 0.6s ease 1.2s forwards;
+  }
+  .js .reveal.in{
+    opacity:1;
+    transform:none;
+    animation:none;
+  }
+  @keyframes revealFallback{
+    to{opacity:1;transform:none;}
+  }
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(15,18,16,0.92);
+    border-bottom:1px solid #262b27;
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:var(--space-2) var(--space-3);
+    max-width:var(--max);
+    margin:0 auto;
+  }
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:1.25rem;
+    letter-spacing:-0.01em;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+  }
+  .logo span{color:var(--accent);}
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:var(--space-4);
+    margin:0;
+    padding:0;
+  }
+  nav ul a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:0.95rem;
+    font-weight:500;
+  }
+  nav ul a:hover{color:var(--text);}
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    padding:0 1.1rem;
+    background:var(--accent);
+    color:#101410;
+    font-weight:600;
+    font-size:0.9rem;
+    text-decoration:none;
+    border-radius:2px;
+    white-space:nowrap;
+  }
+  .menu-toggle{
+    display:none;
+    background:none;
+    border:1px solid #30362f;
+    color:var(--text);
+    min-height:44px;
+    min-width:44px;
+    border-radius:2px;
+    font-size:1.1rem;
+    cursor:pointer;
+  }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap:var(--space-4);
+  }
+
+  @media (max-width:720px){
+    nav ul{
+      position:absolute;
+      top:100%;
+      left:0;
+      right:0;
+      background:var(--surface);
+      flex-direction:column;
+      gap:0;
+      border-bottom:1px solid #262b27;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    nav ul.open{max-height:300px;}
+    nav ul li{width:100%;}
+    nav ul a{
+      display:block;
+      padding:var(--space-2) var(--space-3);
+      border-top:1px solid #262b27;
+    }
+    .nav-cta{display:none;}
+    .menu-toggle{display:inline-block;}
+    .nav-links{position:relative;}
+  }
+
+  /* Hero */
+  .hero{
+    padding:var(--space-6) 0 var(--space-5);
+    border-bottom:1px solid #262b27;
+    background-image:
+      linear-gradient(to right, #1b201c 1px, transparent 1px),
+      linear-gradient(to bottom, #1b201c 1px, transparent 1px);
+    background-size:40px 40px;
+    background-position:center top;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:var(--space-5);
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.78rem;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    margin-bottom:var(--space-3);
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;
+    height:1px;
+    background:var(--accent);
+  }
+  h1.headline{
+    font-size:clamp(2.2rem, 6vw, 3.8rem);
+    line-height:1.05;
+  }
+  .hero-sub{
+    margin-top:var(--space-3);
+    color:var(--muted);
+    font-size:1.05rem;
+    max-width:40ch;
+  }
+  .hero-actions{
+    margin-top:var(--space-4);
+    display:flex;
+    gap:var(--space-3);
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:0 1.5rem;
+    background:var(--accent);
+    color:#101410;
+    font-weight:600;
+    text-decoration:none;
+    border-radius:2px;
+    font-size:0.98rem;
+  }
+  .btn-ghost{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:0 1.5rem;
+    border:1px solid #30362f;
+    color:var(--text);
+    text-decoration:none;
+    border-radius:2px;
+    font-size:0.98rem;
+  }
+  .hero-figure{
+    position:relative;
+    border:1px solid #262b27;
+  }
+  .hero-figure img{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+  }
+  .tick-caption{
+    display:flex;
+    justify-content:space-between;
+    font-size:0.75rem;
+    color:var(--muted);
+    margin-top:var(--space-1);
+    font-family:'Space Grotesk',sans-serif;
+    letter-spacing:0.05em;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+
+  /* Proof / numbers column */
+  .proof{
+    padding:var(--space-5) 0;
+    border-bottom:1px solid #262b27;
+  }
+  .proof-head{
+    max-width:46ch;
+    margin-bottom:var(--space-4);
+  }
+  .proof-head h2{font-size:clamp(1.5rem,3.5vw,2rem);}
+  .proof-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .proof-row{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:var(--space-3);
+    padding:var(--space-3) 0;
+    border-top:1px solid #262b27;
+    align-items:baseline;
+  }
+  .proof-row:last-child{border-bottom:1px solid #262b27;}
+  .proof-num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.8rem,4vw,2.6rem);
+    color:var(--accent);
+    letter-spacing:-0.02em;
+  }
+  .proof-label{
+    color:var(--text);
+    font-weight:500;
+  }
+  .proof-desc{
+    color:var(--muted);
+    font-size:0.92rem;
+    margin-top:0.2rem;
+  }
+  @media (max-width:600px){
+    .proof-row{grid-template-columns:1fr;gap:0.3rem;}
+  }
+
+  /* How it works */
+  .how{
+    padding:var(--space-5) 0;
+    border-bottom:1px solid #262b27;
+  }
+  .how h2{
+    font-size:clamp(1.5rem,3.5vw,2rem);
+    margin-bottom:var(--space-4);
+  }
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:var(--space-3);
+  }
+  .step{
+    border-top:3px solid var(--accent2);
+    padding-top:var(--space-2);
+    position:relative;
+  }
+  .step::before{
+    content:attr(data-index);
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--muted);
+    font-size:0.8rem;
+    letter-spacing:0.1em;
+  }
+  .step h3{
+    font-size:1.25rem;
+    margin:var(--space-1) 0 var(--space-1);
+  }
+  .step p{
+    color:var(--muted);
+    font-size:0.95rem;
+  }
+  @media (max-width:720px){
+    .timeline{grid-template-columns:1fr;}
+  }
+
+  /* Feature split */
+  .feature{
+    padding:var(--space-5) 0;
+    border-bottom:1px solid #262b27;
+  }
+  .feature-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:var(--space-5);
+    align-items:center;
+  }
+  .feature h2{
+    font-size:clamp(1.6rem,4vw,2.3rem);
+    margin-bottom:var(--space-3);
+  }
+  .feature p{
+    color:var(--muted);
+    margin-bottom:var(--space-2);
+    max-width:46ch;
+  }
+  .feature-list{
+    margin-top:var(--space-3);
+    list-style:none;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:var(--space-1);
+  }
+  .feature-list li{
+    padding-left:1.4rem;
+    position:relative;
+    color:var(--text);
+    font-size:0.95rem;
+  }
+  .feature-list li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+  }
+  .feature-figure img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    border:1px solid #262b27;
+  }
+  @media (max-width:860px){
+    .feature-grid{grid-template-columns:1fr;}
+    .feature-figure{order:-1;}
+  }
+
+  /* Comparison */
+  .compare{
+    padding:var(--space-5) 0;
+    border-bottom:1px solid #262b27;
+  }
+  .compare h2{
+    font-size:clamp(1.5rem,3.5vw,2rem);
+    margin-bottom:var(--space-4);
+  }
+  .pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-top:1px solid #262b27;
+  }
+  .pair:last-child{border-bottom:1px solid #262b27;}
+  .pair > div{
+    padding:var(--space-3);
+  }
+  .pair .generic{
+    color:var(--muted);
+    border-right:1px solid #262b27;
+  }
+  .pair .probe{
+    color:var(--text);
+    font-weight:500;
+  }
+  .pair-label{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:0.3rem;
+  }
+  .pair .generic .pair-label{color:var(--muted);}
+  .pair .probe .pair-label{color:var(--accent);}
+  @media (max-width:600px){
+    .pair{grid-template-columns:1fr;}
+    .pair .generic{border-right:none;border-bottom:1px solid #262b27;}
+  }
+
+  /* Testimonial */
+  .quote-section{
+    padding:var(--space-6) 0;
+    border-bottom:1px solid #262b27;
+  }
+  blockquote{
+    margin:0;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.4rem,3.6vw,2.2rem);
+    line-height:1.3;
+    letter-spacing:-0.01em;
+    max-width:28ch;
+  }
+  .quote-attr{
+    margin-top:var(--space-3);
+    color:var(--muted);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:0.95rem;
+  }
+
+  /* Closing CTA */
+  .cta-band{
+    padding:var(--space-6) 0;
+    text-align:left;
+    background:var(--surface);
+  }
+  .cta-band h2{
+    font-size:clamp(1.8rem,5vw,2.8rem);
+    max-width:20ch;
+  }
+  .cta-band p{
+    color:var(--muted);
+    margin-top:var(--space-2);
+    max-width:40ch;
+  }
+  .cta-band .btn-primary{
+    margin-top:var(--space-4);
+  }
+
+  footer{
+    padding:var(--space-4) 0;
+    color:var(--muted);
+    font-size:0.85rem;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:var(--space-2);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Probe<span>.</span></div>
+    <!-- logo mark removed; using text wordmark only to avoid empty placeholder box -->
+    <div class="nav-links">
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navList">☰</button>
+      <ul id="navList">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#feature">Probes</a></li>
+        <li><a href="#compare">Compare</a></li>
+      </ul>
+      <a href="#cta" class="nav-cta">Post a Probe Job</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Technical hiring, calibrated</div>
+        <h1 class="headline">Post the job once. Probe finds who can actually do the work.</h1>
+        <p class="hero-sub">Generic job posts collect resumes. Probe jobs collect evidence — built from adaptive, role-specific probes that filter before anyone reads a CV.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn-primary">Post a Probe Job</a>
+          <a href="#how" class="btn-ghost">See how it works</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="hero-figure">
+          <img src="https://zqetssozqghtnylxaojl.supabase.co/storage/v1/object/public/deliverables/fe08831b-9952-40af-82b6-450305b9f9c9/page-hero-0-mvwm4ca2.jpg" alt="Close-up of a precision calibration instrument with a glowing chartreuse marker against a dark olive background" width="1600" height="900" style="width:100%;aspect-ratio:16/9;object-fit:cover;">
+        </div>
+        <div class="tick-caption"><span>0.0</span><span>2.5</span><span>5.0</span><span>7.5</span><span>10.0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <div class="proof-head reveal">
+        <h2>Measured, not guessed</h2>
+      </div>
+      <div class="proof-list">
+        <div class="proof-row reveal">
+          <div class="proof-num">01</div>
+          <div>
+            <div class="proof-label">Candidate quality</div>
+            <div class="proof-desc">Shortlists built from demonstrated work, not keyword matches.</div>
+          </div>
+        </div>
+        <div class="proof-row reveal">
+          <div class="proof-num">02</div>
+          <div>
+            <div class="proof-label">Time-to-hire</div>
+            <div class="proof-desc">Screening compresses to the time it takes candidates to complete a probe.</div>
+          </div>
+        </div>
+        <div class="proof-row reveal">
+          <div class="proof-num">03</div>
+          <div>
+            <div class="proof-label">Screen-out rate</div>
+            <div class="proof-desc">Unqualified applicants are filtered before they reach a reviewer's queue.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="wrap">
+      <h2 class="reveal">Three steps, calibrated in order</h2>
+      <div class="timeline">
+        <div class="step reveal" data-index="— 01">
+          <h3>Define</h3>
+          <p>Set the role, the skills that matter, and the bar for passing.</p>
+        </div>
+        <div class="step reveal" data-index="— 02">
+          <h3>Probe</h3>
+          <p>Candidates complete an adaptive technical probe built for the role, not a generic quiz.</p>
+        </div>
+        <div class="step reveal" data-index="— 03">
+          <h3>Shortlist</h3>
+          <p>Only the candidates who clear the bar reach your inbox, ranked by result.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature" id="feature">
+    <div class="wrap feature-grid">
+      <div class="reveal">
+        <h2>Probes adapt to the role, not the other way around</h2>
+        <p>Every probe is tuned to the specific skills a role requires, adjusting difficulty as a candidate answers — so a senior backend role and a junior frontend role are never measured on the same scale.</p>
+        <ul class="feature-list">
+          <li>Difficulty recalibrates in real time per candidate</li>
+          <li>Built around the actual tools and constraints of the role</li>
+          <li>Results come back as a clear pass signal, not a raw score to interpret</li>
+        </ul>
+      </div>
+      <div class="feature-figure reveal">
+        <img src="https://zqetssozqghtnylxaojl.supabase.co/storage/v1/object/public/deliverables/fe08831b-9952-40af-82b6-450305b9f9c9/page-feature-1-mvwm4fua.jpg" alt="Abstract technical grid pattern with a single green light beam on dark background" width="1200" height="900" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+      </div>
+    </div>
+  </section>
+
+  <section class="compare" id="compare">
+    <div class="wrap">
+      <h2 class="reveal">What changes when the job post is a probe job</h2>
+      <div class="pair reveal">
+        <div class="generic"><span class="pair-label">Generic job post</span>Anyone can apply, and most do.</div>
+        <div class="probe"><span class="pair-label">Probe job post</span>Only candidates who complete the probe move forward.</div>
+      </div>
+      <div class="pair reveal">
+        <div class="generic"><span class="pair-label">Generic job post</span>A resume says what someone claims they can do.</div>
+        <div class="probe"><span class="pair-label">Probe job post</span>A probe result shows what they actually did.</div>
+      </div>
+      <div class="pair reveal">
+        <div class="generic"><span class="pair-label">Generic job post</span>Screening happens after the pile builds up.</div>
+        <div class="probe"><span class="pair-label">Probe job post</span>Screening happens before the pile exists.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <div class="wrap reveal">
+      <blockquote>"We stopped reading resumes to find skill. We started reading results."</blockquote>
+      <div class="quote-attr">— A hiring lead, on switching to probe job posts</div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="cta">
+    <div class="wrap reveal">
+      <h2>Post a Probe Job</h2>
+      <p>One posting, calibrated to the role, filtering before the first interview is ever scheduled.</p>
+      <a href="#" class="btn-primary">Post a Probe Job</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:1rem;">
+    <span>Probe — precision hiring instrument</span>
+    <span>Test deliverable page</span>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  var toggle = document.getElementById('menuToggle');
+  var navList = document.getElementById('navList');
+  if(toggle && navList){
+    toggle.addEventListener('click', function(){
+      var open = navList.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  if('IntersectionObserver' in window){
+    var items = document.querySelectorAll('.reveal');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.05, rootMargin:'0px 0px -5% 0px'});
+    items.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  window.addEventListener('load', function(){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  });
+  setTimeout(function(){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }, 1500);
+</script>
+
+</body>
+</html>
