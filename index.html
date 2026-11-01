@@ -93,20 +93,20 @@
     gap:0.4rem;
   }
   .logo span{color:var(--accent);}
-  nav ul{
+  .nav ul{
     list-style:none;
     display:flex;
     gap:var(--space-4);
     margin:0;
     padding:0;
   }
-  nav ul a{
+  .nav ul a{
     text-decoration:none;
     color:var(--muted);
     font-size:0.95rem;
     font-weight:500;
   }
-  nav ul a:hover{color:var(--text);}
+  .nav ul a:hover{color:var(--text);}
   .nav-cta{
     display:inline-flex;
     align-items:center;
@@ -124,14 +124,31 @@
   .menu-toggle{
     display:none;
     background:none;
-    border:1px solid #30362f;
+    border:none;
     color:var(--text);
     min-height:44px;
     min-width:44px;
     border-radius:2px;
     font-size:1.1rem;
     cursor:pointer;
+    position:relative;
+    padding:0;
   }
+  .menu-toggle .bar{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:24px;
+    height:2px;
+    background:var(--text);
+    transform:translate(-50%,-50%);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .menu-toggle .bar:nth-child(1){margin-top:-7px;}
+  .menu-toggle .bar:nth-child(3){margin-top:7px;}
+  .menu-toggle.open .bar:nth-child(1){margin-top:0;transform:translate(-50%,-50%) rotate(45deg);}
+  .menu-toggle.open .bar:nth-child(2){opacity:0;}
+  .menu-toggle.open .bar:nth-child(3){margin-top:0;transform:translate(-50%,-50%) rotate(-45deg);}
   .nav-links{
     display:flex;
     align-items:center;
@@ -139,29 +156,44 @@
   }
 
   @media (max-width:720px){
-    nav ul{
-      position:absolute;
-      top:100%;
+    .nav ul{
+      position:fixed;
+      top:0;
       left:0;
       right:0;
-      background:var(--surface);
+      bottom:0;
+      background:var(--bg);
       flex-direction:column;
       gap:0;
-      border-bottom:1px solid #262b27;
-      max-height:0;
+      border-bottom:none;
+      max-height:none;
       overflow:hidden;
-      transition:max-height .3s ease;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .2s ease;
+      padding:calc(var(--space-2) + 44px) var(--space-3) var(--space-3);
+      justify-content:flex-start;
+      z-index:60;
     }
-    nav ul.open{max-height:300px;}
-    nav ul li{width:100%;}
-    nav ul a{
+    .nav ul.open{opacity:1;visibility:visible;}
+    .nav ul li{width:100%;}
+    .nav ul a{
       display:block;
-      padding:var(--space-2) var(--space-3);
+      padding:var(--space-3) 0;
       border-top:1px solid #262b27;
+      font-size:22px;
     }
+    .nav ul li:last-child a{border-bottom:1px solid #262b27;}
     .nav-cta{display:none;}
     .menu-toggle{display:inline-block;}
     .nav-links{position:relative;}
+    .nav{position:relative;}
+    .logo{position:relative;z-index:61;}
+    .menu-toggle{position:relative;z-index:61;}
+    .nav-cta.mobile-cta{
+      display:inline-flex;
+      margin-top:var(--space-3);
+    }
   }
 
   /* Hero */
@@ -490,11 +522,14 @@
     <div class="logo">Probe<span>.</span></div>
     <!-- logo mark removed; using text wordmark only to avoid empty placeholder box -->
     <div class="nav-links">
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navList">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navList">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
       <ul id="navList">
         <li><a href="#how">How it works</a></li>
         <li><a href="#feature">Probes</a></li>
         <li><a href="#compare">Compare</a></li>
+        <li><a href="#cta" class="nav-cta mobile-cta">Post a Probe Job</a></li>
       </ul>
       <a href="#cta" class="nav-cta">Post a Probe Job</a>
     </div>
@@ -637,9 +672,30 @@
   var toggle = document.getElementById('menuToggle');
   var navList = document.getElementById('navList');
   if(toggle && navList){
+    function closeMenu(){
+      navList.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    }
+    function openMenu(){
+      navList.classList.add('open');
+      toggle.classList.add('open');
+      toggle.setAttribute('aria-expanded','true');
+      document.body.style.overflow='hidden';
+    }
     toggle.addEventListener('click', function(){
-      var open = navList.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(navList.classList.contains('open')){
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+    navList.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ closeMenu(); }
     });
   }
 
